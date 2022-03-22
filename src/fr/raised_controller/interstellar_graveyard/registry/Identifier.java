@@ -29,6 +29,11 @@ public class Identifier {
 	public String getPath() {
 		return path;
 	}
+	
+	public String toString()
+	{
+		return this.namespace+":"+this.path;
+	}
 
 	@Override
 	public int hashCode() {
