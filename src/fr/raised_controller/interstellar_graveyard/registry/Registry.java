@@ -9,6 +9,7 @@ import com.google.common.collect.HashBiMap;
 public abstract class Registry<T> {
 	
 	protected BiMap<RegistryKey<? extends T>, T> values;
+	protected Map<Identifier, T> idEntries;
 	private boolean erraseDuplicateKey;
 	private RegistryKey<Registry<? extends T>> key;
 	
@@ -17,6 +18,7 @@ public abstract class Registry<T> {
 		this.values = HashBiMap.create();
 		erraseDuplicateKey = true;
 		this.key = key;
+		idEntries = new HashMap<>();
 	}
 	
 	public Registry<T> preventDuplicateKeyErase()
@@ -28,6 +30,7 @@ public abstract class Registry<T> {
 	public <R extends T> R add(RegistryKey<? extends T> key2, R registry)
 	{
 		values.put(key2, registry);
+		idEntries.put(key2.getValue(), registry);
 		return registry;
 	}
 	

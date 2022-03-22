@@ -13,11 +13,11 @@ public class DefaultedRegistry<T> extends Registry<T>{
 
 	@Override
 	public T get(Identifier id) {
-		if(!values.containsKey(id))
+		if(!idEntries.containsKey(id))
 		{
 			return defaultValue.provide();
 		}
-		return values.get(id);
+		return idEntries.get(id);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public class SimpleRegistry<T> extends Registry<T>{
 
 	@Override
 	public T get(Identifier id) {
-		return values.get(id);
+		return idEntries.get(id);
 	}
 
 	@Override
