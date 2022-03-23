@@ -2,22 +2,30 @@ package fr.raised_controller.interstellar_graveyard.registry;
 
 public class DefaultedRegistry<T> extends Registry<T>{
 	
-	private DefaultProvider<T> defaultValue;
 	private Identifier defaultId;
 
-	protected DefaultedRegistry(RegistryKey<? extends Registry<T>> key, Identifier defaultId, DefaultProvider<T> defaultValue) {
+	protected DefaultedRegistry(RegistryKey<? extends Registry<T>> key, Identifier defaultId) {
 		super(key);
 		this.defaultId = defaultId;
-		this.defaultValue = defaultValue;
 	}
 
 	@Override
 	public T get(Identifier id) {
 		if(!idEntries.containsKey(id))
 		{
-			return defaultValue.provide();
+			return idEntries.get(defaultId);
 		}
 		return idEntries.get(id);
+	}
+	
+	public Identifier getDefaultId()
+	{
+		return defaultId;
+	}
+	
+	public T getDefaultValue()
+	{
+		return idEntries.get(defaultId);
 	}
 
 	@Override
