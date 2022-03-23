@@ -9,7 +9,6 @@ import fr.raised_controller.interstellar_graveyard.board.element.BoardPiece;
 import fr.raised_controller.interstellar_graveyard.board.element.PieceSettings;
 import fr.raised_controller.interstellar_graveyard.board.element.property.Property;
 import fr.raised_controller.interstellar_graveyard.board.element.property.PropertyValue;
-import fr.raised_controller.interstellar_graveyard.exception.DuplicatedPropertyException;
 import fr.raised_controller.interstellar_graveyard.exception.IllegalPropertyValue;
 
 public class BoardToken{
@@ -47,7 +46,7 @@ public class BoardToken{
 	
 	public <T> T get(Property<T> prop)
 	{
-		return prop.getType().cast(properties.get(prop));
+		return prop.getType().cast(properties.get(prop).get());
 	}
 	
 	public List<Property<?>> getProperties()

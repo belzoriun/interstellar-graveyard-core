@@ -1,7 +1,6 @@
 package fr.raised_controller.interstellar_graveyard.registry;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.collect.Maps;

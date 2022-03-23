@@ -2,7 +2,7 @@ package fr.raised_controller.interstellar_graveyard.registry;
 
 public class SimpleRegistry<T> extends Registry<T>{
 
-	protected SimpleRegistry(RegistryKey<Registry<? extends T>> key) {
+	protected SimpleRegistry(RegistryKey<? extends Registry<T>> key) {
 		super(key);
 	}
 

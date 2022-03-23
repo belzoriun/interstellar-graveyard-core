@@ -5,7 +5,7 @@ public class DefaultedRegistry<T> extends Registry<T>{
 	private DefaultProvider<T> defaultValue;
 	private Identifier defaultId;
 
-	protected DefaultedRegistry(RegistryKey<Registry<? extends T>> key, Identifier defaultId, DefaultProvider<T> defaultValue) {
+	protected DefaultedRegistry(RegistryKey<? extends Registry<T>> key, Identifier defaultId, DefaultProvider<T> defaultValue) {
 		super(key);
 		this.defaultId = defaultId;
 		this.defaultValue = defaultValue;
