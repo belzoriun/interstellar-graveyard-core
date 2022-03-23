@@ -10,8 +10,17 @@ public abstract class BoardPiece {
 	protected BoardPiece(PieceSettings _settings)
 	{
 		settings = _settings;
+		BoardToken.Builder builder = new BoardToken.Builder(this);
+		builder.useSettings(_settings);
+		setProperties(builder);
+		this.defaultToken = builder.build();
 	}
 	
 	public void setProperties(BoardToken.Builder builder)
 	{}
+
+	public BoardToken getDefaultToken()
+	{
+		return this.defaultToken;
+	}
 }
