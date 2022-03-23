@@ -131,11 +131,7 @@ public abstract class Registry<T> implements Iterable<T>{
 		}
 	}
 
-	public static void setupRegistries() {
-		for(Registry<?> registry : ROOT)
-		{
-			validate(registry);
-		}
+	private static void setupRegistries() {
 		for(Map.Entry<Identifier, DefaultProvider<?>> entry : DEFAULT_ENTRIES.entrySet())
 		{
 			if(entry.getValue().provide() == null)
@@ -143,5 +139,14 @@ public abstract class Registry<T> implements Iterable<T>{
 				System.out.println("Impossible to boot registry "+entry.getKey());
 			}
 		}
+		for(Registry<?> registry : ROOT)
+		{
+			validate(registry);
+		}
+	}
+	
+	
+	static {
+		setupRegistries();
 	}
 }
