@@ -51,8 +51,7 @@ public abstract class TextureMapper<T> {
 	
 	private InputStream getTextureFile(String path)
 	{
-		ClassLoader loader = TextureMapper.class.getClassLoader();
-		return loader.getResourceAsStream(path);
+		return TextureMapper.class.getResourceAsStream(path);
 	}
 	
 	protected TextureMapper(T defaultTexture)
