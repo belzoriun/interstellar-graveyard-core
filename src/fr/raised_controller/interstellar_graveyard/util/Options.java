@@ -1,9 +1,6 @@
 package fr.raised_controller.interstellar_graveyard.util;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,16 +11,12 @@ import java.util.regex.Pattern;
 
 public class Options {
 	public static Options instance = Options.create();
-	private File optionFile;
 	private Map<OptionKey, Object> options;
 	
 	private static final String OPTION_PATTERN = ".*:.*";
 	
-	private static final String OPTION_PATH = "fr/raised_controller/intersetllar_graveyard/options.txt";
-	
 	private Options()
 	{
-		optionFile = new File(OPTION_PATH);
 		initOptions();
 		Class<Options> clazz = Options.class;
 	    InputStream inputStream = clazz.getResourceAsStream("/options.txt");

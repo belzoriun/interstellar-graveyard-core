@@ -1,7 +1,5 @@
 package fr.raised_controller.interstellar_graveyard.board.biome;
 
-import java.util.List;
-
 import fr.raised_controller.interstellar_graveyard.board.element.BoardPieces;
 
 public class AsteroidBeltBiome extends Biome{

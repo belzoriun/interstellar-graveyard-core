@@ -5,7 +5,6 @@ import java.util.Map;
 
 import fr.raised_controller.interstellar_graveyard.board.biome.Biome;
 import fr.raised_controller.interstellar_graveyard.board.element.BoardPiece;
-import fr.raised_controller.interstellar_graveyard.board.element.BoardPieces;
 import fr.raised_controller.interstellar_graveyard.registry.Registry;
 import fr.raised_controller.interstellar_graveyard.util.Position;
 import fr.raised_controller.interstellar_graveyard.util.noise.Noise;
@@ -28,7 +27,7 @@ public abstract class NoiseChunkBuilder implements ChunkBuilder{
 			values.put(entry.getKey(), entry.getValue().evaluate(pos.getX(), pos.getY()));
 		}
 		double value = combiner(values);
-		if(value > -0.6)
+		if(value > GROUND_LEVEL)
 		{
 			return evaluate(value).getPiece(scale(value));
 		}

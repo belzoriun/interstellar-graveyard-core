@@ -10,7 +10,6 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterators;
 
-import fr.raised_controller.interstellar_graveyard.board.chunk.ChunkBuilder;
 import fr.raised_controller.interstellar_graveyard.board.chunk.ChunkBuilderProvider;
 import fr.raised_controller.interstellar_graveyard.board.chunk.ChunkBuilders;
 import fr.raised_controller.interstellar_graveyard.board.element.BoardPiece;

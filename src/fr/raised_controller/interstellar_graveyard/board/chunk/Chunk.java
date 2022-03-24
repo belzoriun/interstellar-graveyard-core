@@ -42,4 +42,8 @@ public class Chunk {
 	{
 		return tokens.get(pos);
 	}
+
+	public static Chunk emptyChunk(Position pos) {
+		return new Chunk(pos, new EmptyChunkBuilder());
+	}
 }
