@@ -5,7 +5,6 @@ import java.util.Map;
 
 import fr.raised_controller.interstellar_graveyard.board.Board;
 import fr.raised_controller.interstellar_graveyard.board.element.BoardPiece;
-import fr.raised_controller.interstellar_graveyard.board.token.BoardToken;
 import fr.raised_controller.interstellar_graveyard.util.Position;
 
 public class Chunk {

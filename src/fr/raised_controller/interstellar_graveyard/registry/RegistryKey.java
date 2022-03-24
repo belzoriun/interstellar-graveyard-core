@@ -39,7 +39,11 @@ public class RegistryKey<T> {
 	}
 
 	public Identifier getValue() {
-		// TODO Auto-generated method stub
 		return value;
+	}
+	
+	public String toString()
+	{
+		return this.registry+":"+this.value;
 	}
 }

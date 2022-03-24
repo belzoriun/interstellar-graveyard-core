@@ -1,3 +1,6 @@
 {
-	"ig.piece.void":"an empty place"
+	"ig.piece.void":"an empty place",
+	"ig.piece.tiny_asteroid":"A litle standard asteroid",
+	"ig.piece.medium_asteroid":"A medium standard asteroid",
+	"ig.piece.large_asteroid":"A large standard asteroid"
 }

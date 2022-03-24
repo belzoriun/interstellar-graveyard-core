@@ -10,6 +10,9 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterators;
 
+import fr.raised_controller.interstellar_graveyard.board.chunk.ChunkBuilder;
+import fr.raised_controller.interstellar_graveyard.board.chunk.ChunkBuilderProvider;
+import fr.raised_controller.interstellar_graveyard.board.chunk.ChunkBuilders;
 import fr.raised_controller.interstellar_graveyard.board.element.BoardPiece;
 import fr.raised_controller.interstellar_graveyard.board.element.BoardPieces;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -67,6 +70,11 @@ public abstract class Registry<T> implements Iterable<T>{
 		return registry;
 	}
 	
+	public String toString()
+	{
+		return "Registry["+this.key+"]";
+	}
+	
 	public abstract T get(Identifier id);	
 	public abstract Identifier getId(T value);
 	
@@ -75,9 +83,11 @@ public abstract class Registry<T> implements Iterable<T>{
 	
 	public static final Identifier ROOT_KEY = new Identifier("root");
 	public static final RegistryKey<Registry<BoardPiece>> PIECE_KEY = Registry.createRegistryKey("piece");
+	public static final RegistryKey<Registry<ChunkBuilderProvider>> CHUNK_BUILDER_KEY = Registry.createRegistryKey("chunk_builder");
 	
 	public static final Registry<Registry<?>> ROOT = new SimpleRegistry<Registry<?>>(Registry.createRegistryKey("root"));
-	public static final DefaultedRegistry<BoardPiece> PIECE = Registry.create(PIECE_KEY, "void", ()->BoardPieces.VoidPiece);
+	public static final DefaultedRegistry<BoardPiece> PIECE = Registry.create(PIECE_KEY, "void", ()->BoardPieces.VOID_PIECE);
+	public static final DefaultedRegistry<ChunkBuilderProvider> CHUNK_BUILDER = Registry.create(CHUNK_BUILDER_KEY, "opensimplexnoise_chunk_builder", ()->ChunkBuilders.OPENSIMPLEX_NOISE_CHUNK_BUILDER);
 	
 	private static <T> RegistryKey<Registry<T>> createRegistryKey(String id)
 	{
@@ -89,6 +99,7 @@ public abstract class Registry<T> implements Iterable<T>{
 		return create(key, new DefaultedRegistry<T>(key, new Identifier(defaultId)), provider);
 	}
 	
+	@SuppressWarnings("unused")
 	private static <T> SimpleRegistry<T> create(RegistryKey<? extends Registry<T>> key, DefaultProvider<T> provider)
 	{
 		return create(key, new SimpleRegistry<T>(key), provider);

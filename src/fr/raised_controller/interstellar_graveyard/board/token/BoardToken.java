@@ -15,7 +15,7 @@ public class BoardToken{
 	protected BoardPiece piece;
 	protected Map<Property<?>, PropertyValue<?>> properties;
 	
-	protected BoardToken(BoardPiece piece, Map<String, Property<?>> properties)
+	protected BoardToken(BoardPiece piece, PieceSettings settings, Map<String, Property<?>> properties)
 	{
 		this.piece = piece;
 		for(Property<?> prop : properties.values())
@@ -64,6 +64,7 @@ public class BoardToken{
 		{
 			properties = new HashMap<>();
 			this.owner=owner;
+			settings = new PieceSettings();
 		}
 		
 		public Builder useSettings(PieceSettings settings)
@@ -83,7 +84,7 @@ public class BoardToken{
 		
 		public BoardToken build()
 		{
-			return new BoardToken(owner, properties);
+			return new BoardToken(owner, settings, properties);
 		}
 	}
 }

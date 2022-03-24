@@ -3,6 +3,7 @@ package fr.raised_controller.interstellar_graveyard.game;
 import fr.raised_controller.interstellar_graveyard.registry.Identifier;
 import fr.raised_controller.interstellar_graveyard.registry.Registry;
 import fr.raised_controller.interstellar_graveyard.util.Language;
+import fr.raised_controller.interstellar_graveyard.util.texture.TextTextureMapper;
 
 public class BootStrap {
 	public static void init()
@@ -23,5 +24,6 @@ public class BootStrap {
 		{
 			System.out.println("WARN : Missing translation : "+missingTranslationKey);
 		}
+		TextTextureMapper.instance.init();
 	}
 }
