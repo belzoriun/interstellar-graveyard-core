@@ -5,6 +5,8 @@ import java.util.Map;
 
 import fr.raised_controller.interstellar_graveyard.registry.Identifier;
 import fr.raised_controller.interstellar_graveyard.registry.Registry;
+import fr.raised_controller.interstellar_graveyard.util.option.OptionKey;
+import fr.raised_controller.interstellar_graveyard.util.option.Options;
 import fr.raised_controller.interstellar_graveyard.util.translator.TranslationBuilder;
 
 public class Language {
@@ -24,7 +26,7 @@ public class Language {
 	
 	public static Language create()
 	{
-		String lang = Options.instance.<String>get(OptionKey.LANG);
+		String lang = Options.instance.LANG_OPTION.get();
 		TranslationBuilder builder = new TranslationBuilder();
 		builder.createRegistryTranslation(Registry.PIECE);
 		return new Language(builder, lang);

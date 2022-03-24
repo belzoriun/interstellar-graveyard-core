@@ -19,6 +19,8 @@ public class Game {
 		Chunk chunk = new Chunk(new Position(0, 0), builder);
 		chunk.AddToBoard(board);
 		
+		int rendreDistance = 1;
+		
 		
 	}
 

@@ -1,17 +1,15 @@
-package fr.raised_controller.interstellar_graveyard.util;
+package fr.raised_controller.interstellar_graveyard.util.option;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Options {
 	public static Options instance = Options.create();
-	private Map<OptionKey, Object> options;
+	public Option<String> LANG_OPTION;
 	
 	private static final String OPTION_PATTERN = ".*:.*";
 	
@@ -30,8 +28,7 @@ public class Options {
 	
 	private void initOptions()
 	{
-		options = new HashMap<>();
-		options.put(OptionKey.LANG, "en_us");
+		LANG_OPTION = new Option<String>(String.class, "en_us");
 	}
 	
 	private void parseOptions(BufferedReader reader) throws IOException
@@ -48,14 +45,14 @@ public class Options {
 			}
 			OptionKey name = OptionKey.fromKey(line.split(":")[0]);
 			String value = line.split(":")[1];
-			if(name.equals(OptionKey.DEFAULT) || !options.containsKey(name))
+			if(name.equals(OptionKey.DEFAULT))
 			{
 				System.out.println("Error in option line, "+name+" option was not found");
 				continue;
 			}
 			try
 			{
-				options.put(name, name.getType().cast(value));
+				setOption(name, value);
 			}catch(Exception e)
 			{
 				System.out.println("Error in option set, "+name+":"+value+" is wrongly typed, expected "+name.getType());
@@ -63,24 +60,19 @@ public class Options {
 		}
 	}
 	
+	private boolean setOption(OptionKey key, Object value)
+	{
+		switch(key)
+		{
+		case LANG:
+			return LANG_OPTION.set(value);
+		default:
+			return false;
+		}
+	}
+	
 	private static Options create()
 	{
 		return new Options();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <T> T get(OptionKey key)
-	{
-		if(!options.containsKey(key))
-		{
-			return null;
-		}
-		try
-		{
-			return (T)key.getType().cast(options.get(key));
-		}catch(Exception e)
-		{
-			return null;
-		}
 	}
 }

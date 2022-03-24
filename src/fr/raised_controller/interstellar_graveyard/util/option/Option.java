@@ -1,11 +1,13 @@
-package fr.raised_controller.interstellar_graveyard.util;
+package fr.raised_controller.interstellar_graveyard.util.option;
 
 public class Option<T> {
 	private T value;
+	private Class<T> type;
 	
-	public Option(T defaultValue)
+	public Option(Class<T> type, T defaultValue)
 	{
 		this.value = defaultValue;
+		this.type = type;
 	}
 	
 	public T get()
@@ -17,7 +19,7 @@ public class Option<T> {
 	{
 		try
 		{
-			this.value = (T)value;
+			this.value = type.cast(value);
 			return true;
 		}catch(Exception e)
 		{

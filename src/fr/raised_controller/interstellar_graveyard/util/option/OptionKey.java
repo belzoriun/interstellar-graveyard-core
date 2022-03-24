@@ -1,4 +1,4 @@
-package fr.raised_controller.interstellar_graveyard.util;
+package fr.raised_controller.interstellar_graveyard.util.option;
 
 public enum OptionKey {
 	LANG("lang", String.class),
