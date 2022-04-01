@@ -29,7 +29,9 @@ public abstract class NoiseChunkBuilder implements ChunkBuilder{
 		double value = combiner(values);
 		if(value > GROUND_LEVEL)
 		{
-			return evaluate(value).getPiece(scale(value));
+			Biome biome = evaluate(value);
+			if(biome != null)
+				return biome.getPiece(scale(value));
 		}
 		return Registry.PIECE.getDefaultValue();
 	}

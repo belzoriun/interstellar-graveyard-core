@@ -26,7 +26,7 @@ public class Language {
 	
 	public static Language create()
 	{
-		String lang = Options.instance.LANG_OPTION.get();
+		String lang = Options.instance.LANG.get();
 		TranslationBuilder builder = new TranslationBuilder();
 		builder.createRegistryTranslation(Registry.PIECE);
 		return new Language(builder, lang);

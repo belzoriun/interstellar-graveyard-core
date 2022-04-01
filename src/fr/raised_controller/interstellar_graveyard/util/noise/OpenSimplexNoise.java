@@ -5,7 +5,13 @@ public class OpenSimplexNoise implements Noise{
 	@Override
 	public double evaluate(int x, int y) {
 		// TODO Auto-generated method stub
-		return eval(x*SCALE, y*SCALE, zIndex*SCALE);
+		return scale(eval(x*SCALE, y*SCALE, zIndex));
+	}
+
+	
+	private double scale(double value)
+	{
+		return (value+1)/2;
 	}
 	
 	private static final double STRETCH_CONSTANT_2D = -0.211324865405187;    // (1/Math.sqrt(2+1)-1)/2;
@@ -26,7 +32,7 @@ public class OpenSimplexNoise implements Noise{
 	private Grad4[] permGrad4;
 	
 	private static final double SCALE = 0.01;
-	private static final int Z_INDEX_INCREMENT = 10;
+	private static final int Z_INDEX_INCREMENT = 5;
 	private static int currentZIndex = 0;
 	private int zIndex;
 	
@@ -52,7 +58,8 @@ public class OpenSimplexNoise implements Noise{
 		permGrad2 = new Grad2[PSIZE];
 		permGrad3 = new Grad3[PSIZE];
 		permGrad4 = new Grad4[PSIZE];
-		this.zIndex = currentZIndex+=Z_INDEX_INCREMENT;
+		this.zIndex = currentZIndex;
+		currentZIndex += Z_INDEX_INCREMENT;
 		short[] source = new short[PSIZE]; 
 		for (short i = 0; i < PSIZE; i++)
 			source[i] = i;
@@ -71,7 +78,6 @@ public class OpenSimplexNoise implements Noise{
 	
 	// 2D OpenSimplex Noise.
 	public double eval(double x, double y) {
-	
 		// Place input coordinates onto grid.
 		double stretchOffset = (x + y) * STRETCH_CONSTANT_2D;
 		double xs = x + stretchOffset;

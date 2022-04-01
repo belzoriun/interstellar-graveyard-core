@@ -11,6 +11,8 @@ public abstract class Biome {
 	
 	private List<BiomeSetting> settings;
 	
+	private static float GROUND_LEVEL = 0.3f;
+	
 	private int getTotalPriority()
 	{
 		int priority = 0;
@@ -24,12 +26,21 @@ public abstract class Biome {
 	private int getTotalPriority(double elevation)
 	{
 		int priority = 0;
+		if(elevation <= GROUND_LEVEL)
+		{
+			return 0;
+		}
 		for(BiomeSetting setting : settings)
 		{
-			if(elevation >= setting.getElevationMin() && elevation <= setting.getElevationMax())
+			if(elevation >= scaleElevation(setting.getElevationMin()) && elevation <= scaleElevation(setting.getElevationMax()))
 				priority += setting.getPriority();
 		}
 		return priority;
+	}
+	
+	private double scaleElevation(double elevation)
+	{
+		return ((1-GROUND_LEVEL)*(elevation))+GROUND_LEVEL;
 	}
 	
 	/**
@@ -39,12 +50,16 @@ public abstract class Biome {
 	 */
 	public BoardPiece getPiece(double elevation)
 	{
+		if(elevation <= GROUND_LEVEL)
+		{
+			return Registry.PIECE.getDefaultValue();			
+		}
 		int totalPriority = this.getTotalPriority(elevation);
 		int selector = new Random().nextInt(totalPriority);
 		int priority = 0;
 		for(BiomeSetting setting : settings)
 		{
-			if(elevation >= setting.getElevationMin() && elevation <= setting.getElevationMax())
+			if(elevation >= scaleElevation(setting.getElevationMin()) && elevation <= scaleElevation(setting.getElevationMax()))
 			{
 				priority += setting.getPriority();
 				if(priority > selector)

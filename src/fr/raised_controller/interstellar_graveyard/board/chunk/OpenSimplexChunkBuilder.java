@@ -26,7 +26,7 @@ public class OpenSimplexChunkBuilder extends NoiseChunkBuilder{
 	public double combiner(Map<String, Double> data) {
 		double density = data.get("density");
 		double electromagnetism = data.get("electromagnetism");
-		if(electromagnetism <= 0.5 && density > 0.3)
+		if(electromagnetism <= 0.4 && density > 0.3 && density <= 0.8)
 		{
 			return 0;
 		}

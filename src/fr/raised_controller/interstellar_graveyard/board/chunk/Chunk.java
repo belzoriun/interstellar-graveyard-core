@@ -46,4 +46,12 @@ public class Chunk {
 	public static Chunk emptyChunk(Position pos) {
 		return new Chunk(pos, new EmptyChunkBuilder());
 	}
+
+	public static Position toChunkPosition(Position playerPosition) {
+		return new Position(playerPosition.getX()/CHUNK_SIZE, playerPosition.getY()/CHUNK_SIZE);
+	}
+
+	public Position getAbsolutePosition(Position position) {
+		return new Position(position.getX()+pos.getX(), position.getY()+pos.getY());
+	}
 }

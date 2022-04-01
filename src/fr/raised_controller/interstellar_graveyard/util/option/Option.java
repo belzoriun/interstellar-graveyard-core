@@ -15,7 +15,7 @@ public class Option<T> {
 		return value;
 	}
 	
-	public boolean set(Object value)
+	protected boolean set(Object value)
 	{
 		try
 		{
@@ -25,5 +25,9 @@ public class Option<T> {
 		{
 			return false;
 		}
+	}
+
+	public Class<T> getType() {
+		return type;
 	}
 }

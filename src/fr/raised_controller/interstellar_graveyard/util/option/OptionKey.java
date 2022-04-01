@@ -1,24 +1,19 @@
 package fr.raised_controller.interstellar_graveyard.util.option;
 
 public enum OptionKey {
-	LANG("lang", String.class),
-	DEFAULT("", String.class);
+	LANG("lang"),
+	RENDER_DISTANCE("renderdistance"),
+	DEFAULT("");
 	
 	private String key;
-	private Class<?> type;
 	
-	private OptionKey(String key, Class<?> type)
+	private OptionKey(String key)
 	{
 		this.key=key;
-		this.type=type;
 	}
 
 	public String getKey() {
 		return key;
-	}
-
-	public Class<?> getType() {
-		return type;
 	}
 	
 	public static OptionKey fromKey(String key)

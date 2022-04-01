@@ -6,6 +6,12 @@ public class Position {
 	private int x;
 	private int y;
 	
+	public Position()
+	{
+		this.x = 0;
+		this.y = 0;
+	}
+	
 	public Position(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -18,7 +24,17 @@ public class Position {
 	public int getY() {
 		return y;
 	}
-
+	
+	public void translateX(int value)
+	{
+		this.x = value;
+	}
+	
+	public void translateY(int value)
+	{
+		this.y = value;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(x, y);
@@ -39,5 +55,10 @@ public class Position {
 	public Position add(Position pos)
 	{
 		return new Position(x+pos.getX(), y+pos.getY());
+	}
+	
+	public String toString()
+	{
+		return "("+x+";"+y+")";
 	}
 }

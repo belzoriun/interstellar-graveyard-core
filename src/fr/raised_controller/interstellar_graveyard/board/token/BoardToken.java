@@ -49,6 +49,11 @@ public class BoardToken{
 		return prop.getType().cast(properties.get(prop).get());
 	}
 	
+	public BoardPiece getPiece()
+	{
+		return this.piece;
+	}
+	
 	public List<Property<?>> getProperties()
 	{
 		return new ArrayList<>(this.properties.keySet());

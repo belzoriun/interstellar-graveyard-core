@@ -4,31 +4,45 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Options {
 	public static Options instance = Options.create();
-	public Option<String> LANG_OPTION;
+	
+	private Map<OptionKey, Option<?>> optionRegister;
 	
 	private static final String OPTION_PATTERN = ".*:.*";
+	private InputStream optionStream;
+	
+	public final Option<String> LANG = registerOption(OptionKey.LANG, String.class, "en_us");
+	public final Option<Integer> RENDER_DISTANCE = registerOption(OptionKey.RENDER_DISTANCE, int.class, 5);
+	
+	private <T> Option<T> registerOption(OptionKey key, Class<T> type, T defaultValue)
+	{
+		if(optionRegister == null)
+		{
+			optionRegister = new HashMap<>();
+		}
+		Option<T> option = new Option<T>(type, defaultValue);
+		optionRegister.put(key, option);
+		return option;
+	}
 	
 	private Options()
 	{
-		initOptions();
 		Class<Options> clazz = Options.class;
-	    InputStream inputStream = clazz.getResourceAsStream("/options.txt");
-		try(BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream)))
+	    optionStream = clazz.getResourceAsStream("/options.txt");
+		try(BufferedReader reader = new BufferedReader(new InputStreamReader(optionStream)))
 		{
 			this.parseOptions(reader);
 		} catch (Exception e) {
 			System.out.println("ERROR : option file not found : setting default options");
 		}
-	}
-	
-	private void initOptions()
-	{
-		LANG_OPTION = new Option<String>(String.class, "en_us");
 	}
 	
 	private void parseOptions(BufferedReader reader) throws IOException
@@ -52,22 +66,35 @@ public class Options {
 			}
 			try
 			{
-				setOption(name, value);
+				if(!setOption(name, value))
+				{
+					System.out.println("Error while setting option "+name.getKey());
+					continue;
+				}
 			}catch(Exception e)
 			{
-				System.out.println("Error in option set, "+name+":"+value+" is wrongly typed, expected "+name.getType());
+				System.out.println("Error in option set, "+name+":"+value+" is wrongly typed, expected "+optionRegister.get(name).getType().getName());
 			}
 		}
 	}
 	
-	private boolean setOption(OptionKey key, Object value)
+	public boolean setOption(OptionKey key, Object value)
 	{
-		switch(key)
+		if(!optionRegister.containsKey(key))
 		{
-		case LANG:
-			return LANG_OPTION.set(value);
-		default:
 			return false;
+		}
+		optionRegister.get(key).set(value);
+		return true;
+	}
+	
+	public void save()
+	{
+		try(BufferedReader reader = new BufferedReader(new InputStreamReader(optionStream)))
+		{
+			
+		} catch (Exception e) {
+			System.out.println("ERROR : option file not found : setting default options");
 		}
 	}
 	
